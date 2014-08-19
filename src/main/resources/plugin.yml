@@ -1,0 +1,18 @@
+name: MPListJoin
+main: com.github.Gamecube762.MPListJoin.MPListJoin
+author: Gamecube762
+version: 1.0
+prefix: MPListJoin
+commands:
+   MPListJoin:
+      description: IsMinecraftDown
+      usage: /<command> <Player>
+      permission: IsMcDown.command
+      permission-message: You don't have <permission>
+permissions:
+   mplistjoin.command:
+      description: Command Permission Node
+      default: OP
+   mplistjoin.telljoin:
+      description: Tell players with this node when a player joins from their multiplayer list
+      default: false

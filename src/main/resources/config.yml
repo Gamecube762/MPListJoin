@@ -1,0 +1,11 @@
+#IPHoldLength: <number in minutes>
+#TellConsole:
+#    ServerPingIP: <true/false> - Tell server when an IP pings server.
+#    PlayerJoinMP: <true/false> - Tell server when detecting a player join from MP.
+#OnlySendMessageIfJoinedByMP: <true/false> - only applies to mplistjoin.telljoin perm node.
+
+IPHoldLength: 5
+TellConsole:
+    ServerPingIP: false
+    PlayerJoinMP: false
+OnlySendMessageIfJoinedByMP: true
