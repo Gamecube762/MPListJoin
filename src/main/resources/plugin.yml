@@ -1,7 +1,7 @@
 name: MPListJoin
 main: com.github.Gamecube762.MPListJoin.MPListJoin
 author: Gamecube762
-version: 1.0
+version: 1.0.1
 prefix: MPListJoin
 commands:
    MPListJoin:

@@ -1,5 +1,6 @@
 package com.github.Gamecube762.MPListJoin;
 
+import com.github.Gamecube762.MPListJoin.Events.PlayerJoinedFromMPListEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -78,10 +79,10 @@ public class MPListJoin extends JavaPlugin implements Listener{
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
-        if ( heldAddresses.contains( e.getPlayer().getAddress().getAddress() ) ) {
-            heldAddresses.remove( e.getPlayer().getAddress().getAddress() );
-            playersJoinedWith.add( e.getPlayer().getUniqueId() );
-        }
+        if (!heldAddresses.contains( e.getPlayer().getAddress().getAddress() ) ) return;
+
+        heldAddresses.remove( e.getPlayer().getAddress().getAddress() );
+        playersJoinedWith.add( e.getPlayer().getUniqueId() );
 
         for (Player p : Bukkit.getOnlinePlayers())
             if (p.hasPermission("mplistjoin.telljoin"))
@@ -89,6 +90,8 @@ public class MPListJoin extends JavaPlugin implements Listener{
 
         if (tell_MP_playJoin && playerUsedMPlist( e.getPlayer() ))
             getLogger().info(e.getPlayer().getDisplayName() + " Joined with the multi-player list!");
+
+        Bukkit.getPluginManager().callEvent( new PlayerJoinedFromMPListEvent(e.getPlayer()) );
 
     }
 
@@ -115,4 +118,5 @@ public class MPListJoin extends JavaPlugin implements Listener{
     public static boolean playerUsedMPlist(Player player) {
         return playersJoinedWith.contains( player.getUniqueId() );
     }
+
 }
