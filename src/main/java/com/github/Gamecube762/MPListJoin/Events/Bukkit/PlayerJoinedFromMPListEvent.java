@@ -1,4 +1,4 @@
-package com.github.Gamecube762.MPListJoin.Events;
+package com.github.Gamecube762.MPListJoin.Events.Bukkit;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
