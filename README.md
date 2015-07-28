@@ -15,16 +15,16 @@ This plugin is being planned to support multiple server platforms.
 |Sponge| Planned - API not ready |
 |TridentSDK| Planned - API not ready |
 
-Multiple platforms may use the same API(Ie: Bukkit API), this plugin should work on those platforms too.
+Multiple platforms may use the same API(Spigot -> Bukkit API), this plugin should work on those platforms too.
 
 How it works
 ============
-This plugin watches the IPs that pings the server, we grab and hold onto that IPs for the time in the config. When a player joins, we check the IPs being held and see if one matches the Player's IP. 
+This plugin watches the IPs that pings the server, we grab and hold onto that IPs for the time in the config. When a player joins, we check the IPs being held and see if one matches the Player's IP.
 
 Since the server was pinged, we can tell that a client had the server in it's multiplayer list, from there, we just need a Player to join so we know who it was.
 
-How to use it in your own plugin
-================================
+How to use it from your own plugin
+==================================
 
 Add this plugin as a Dependency or SoftDependency to your plugin.yml:
 ```
@@ -49,7 +49,7 @@ if (MPListJoin.playerUsedMPlist( player )) {
 Methods available are all Static, no need to save the plugin's instance.
 
 |Method|Returns|
-|  --- | --- |
+| --- | --- |
 |MPListJoin.getPlayersJoinedWith()| List< UUID > |
-|MPListJoin.getHeldAddresses()|HashMap< InetAddress , Long >|
-|MPListJoin.playerUsedMPlist(Player or UUID )| boolean |
+|MPListJoin.getHeldAddresses()|Map< InetAddress , Long >|
+|MPListJoin.playerUsedMPlist(~~Player~~ or UUID )| boolean |

@@ -1,13 +1,13 @@
 name: MPListJoin
 main: com.github.Gamecube762.MPListJoin.BukkitLoader
 author: Gamecube762
-version: 1.1.0
+version: 1.1.5
 prefix: MPListJoin
 commands:
    MPListJoin:
       description: IsMinecraftDown
       usage: /<command> <Player>
-      permission: IsMcDown.command
+      permission: mplistjoin.command
       permission-message: You don't have <permission>
 permissions:
    mplistjoin.command:

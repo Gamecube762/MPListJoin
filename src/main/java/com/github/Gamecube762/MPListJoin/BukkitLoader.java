@@ -7,6 +7,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -14,6 +15,7 @@ import org.bukkit.event.server.ServerListPingEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.net.InetAddress;
+import java.util.Iterator;
 
 /**
  * Created by Gamecube762 on 10/21/2014.
@@ -43,11 +45,16 @@ public class BukkitLoader extends JavaPlugin implements Listener {
         Bukkit.getScheduler().runTaskTimer(this, new Runnable() {
             @Override
             public void run() {
-                for (InetAddress a : MPListJoin.heldAddresses.keySet())
-                    if (MPListJoin.heldAddresses.get(a) <= 1)
-                        MPListJoin.heldAddresses.remove(a);
+                for (Iterator iter = MPListJoin.heldAddresses.keySet().iterator(); iter.hasNext();) {
+
+                    InetAddress a = (InetAddress) iter.next();
+                    long b = MPListJoin.heldAddresses.get(a);
+
+                    if ( b <= 1)
+                        iter.remove();
                     else
-                        MPListJoin.heldAddresses.put(a, MPListJoin.heldAddresses.get(a)-1);
+                        MPListJoin.heldAddresses.put(a, b-1);
+                }
             }
         }, 1, 20);
     }
@@ -87,7 +94,7 @@ public class BukkitLoader extends JavaPlugin implements Listener {
         if (tell_servPing) getLogger().info( e.getAddress() + " Pinged the server!");
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerJoin(PlayerJoinEvent e) {
         if (!MPListJoin.heldAddresses.containsKey( e.getPlayer().getAddress().getAddress() ) ) return;
 
@@ -107,7 +114,10 @@ public class BukkitLoader extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent e) {
-        if ( MPListJoin.playersJoinedWith.contains(e.getPlayer().getUniqueId()) )
-            MPListJoin.playersJoinedWith.remove(e.getPlayer().getUniqueId());
+        for (Iterator iter = MPListJoin.playersJoinedWith.iterator(); iter.hasNext();)
+            if (iter.next() == e.getPlayer().getUniqueId()) {
+                iter.remove();
+                break;
+            }
     }
 }

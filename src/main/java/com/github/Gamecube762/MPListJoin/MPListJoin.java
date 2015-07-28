@@ -4,9 +4,10 @@ import org.bukkit.entity.Player;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by Gamecube762 on 10/21/2014.
@@ -16,17 +17,18 @@ public class MPListJoin {
     protected static ServerType serverType;
 
     protected static List<UUID> playersJoinedWith = new ArrayList<UUID>();
-    protected static HashMap<InetAddress, Long> heldAddresses = new HashMap<InetAddress, Long>();
+    protected static Map<InetAddress, Long> heldAddresses = new ConcurrentHashMap<InetAddress, Long>();
 
 
     public static List<UUID> getPlayersJoinedWith() {
         return playersJoinedWith;
     }
 
-    public static HashMap<InetAddress, Long> getHeldAddresses() {
+    public static Map<InetAddress, Long> getHeldAddresses() {
         return heldAddresses;
     }
 
+    @Deprecated//to be removed with Sponge or Trident release.
     public static boolean playerUsedMPlist(Player player) {
         return playersJoinedWith.contains(player.getUniqueId());
     }
